@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CamTest2</string>
+    <string name="button_camera">Take Photo</string>
+    <string name="image_cd_camera">This is a generic content description</string>
+</resources>
