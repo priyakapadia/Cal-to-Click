@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/jaybob320/AndroidStudioProjects/CamTest2/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="/Users/jaybob320/AndroidStudioProjects/CamTest2/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-f5761fd204bdcf61301f49a4fc61b1055bccc287.jar" />
+    </item>
+    <item
+        jar="/Users/jaybob320/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="/Users/jaybob320/AndroidStudioProjects/CamTest2/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-ba692ac752c7b26a002a1ff828025ad30722091e.jar" />
+    </item>
+    <item
+        jar="/Users/jaybob320/AndroidStudioProjects/CamTest2/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="/Users/jaybob320/AndroidStudioProjects/CamTest2/app/build/intermediates/pre-dexed/debug/classes-31efbeb8c38c517c5bbae2618bc8ebdbd3d0acce.jar" />
+    </item>
+    <item
+        jar="/Users/jaybob320/AndroidStudioProjects/CamTest2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="/Users/jaybob320/AndroidStudioProjects/CamTest2/app/build/intermediates/pre-dexed/debug/classes-bcf0587ed157c417991d9950337a7052f28cd5d9.jar" />
+    </item>
+
+</items>
