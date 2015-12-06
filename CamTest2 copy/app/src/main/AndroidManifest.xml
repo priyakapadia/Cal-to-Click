@@ -3,6 +3,7 @@
     package="jayangel.camtest2" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>﻿
+    <uses-permission android:name="android.permission.Internet"/>
 
     <application
         android:allowBackup="true"
