@@ -74,17 +74,31 @@ public class CamActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode,Intent intent){
         super.onActivityResult(requestCode, resultCode,intent);
 
-
-         /*//adds event to calendar
-        Calendar cal = Calendar.getInstance();
+/*
+         //adds event to calendar
+        //Calendar cal = Calendar.getInstance();
         Intent intent5 = new Intent(Intent.ACTION_EDIT);
         intent5.setData(CalendarContract.Events.CONTENT_URI);
-        intent5.putExtra("beginTime", cal.getTimeInMillis());
-        intent5.putExtra("allDay", true);
-        intent5.putExtra("rrule", "FREQ=YEARLY");
-        intent5.putExtra("endTime", cal.getTimeInMillis() + 60 * 60 * 1000);
-        intent5.putExtra("title", "A Test Event from android app");
-        startActivity(intent5); */
+       // intent5.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime);
+        //intent5.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,endTime);
+        intent5.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+        intent5.putExtra(CalendarContract.ExtendedProperties.NAME,"house");
+        intent5.putExtra(CalendarContract.ExtendedProperties.DESCRIPTION, "This is a sample description");
+        intent5.putExtra(CalendarContract.ExtendedProperties.EVENT_LOCATION, "My Guest House");
+        intent5.putExtra(CalendarContract.ExtendedProperties.RRULE, "FREQ=YEARLY");
+        //intent5.putExtra("beginTime", cal.getTimeInMillis());
+        //intent5.putExtra("allDay", true);
+        //intent5.putExtra("rrule", "FREQ=YEARLY");
+        //intent5.putExtra("endTime", cal.getTimeInMillis() + 60 * 60 * 1000);
+        //intent5.putExtra("title", "A Test Event from android app");
+        startActivity(intent5);
+        */
+/*
+        Intent intent5 = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        intent5.setType("vnd.android.cursor.item/event");
+        startActivity(intent);
+*/
+
 
         if(resultCode == Activity.RESULT_OK) {
             Uri selectedImage = imageUri;
@@ -99,9 +113,10 @@ public class CamActivity extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(cr,selectedImage);
                 imageView.setImageBitmap(bitmap);
-                Toast.makeText(CamActivity.this, selectedImage.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(CamActivity.this, selectedImage.toString(), Toast.LENGTH_LONG).show();
             }catch(Exception e) {
                 Log.e(logtag, e.toString());
+
             }//end of catch
         }// end of if
     } //end of onActivityResult

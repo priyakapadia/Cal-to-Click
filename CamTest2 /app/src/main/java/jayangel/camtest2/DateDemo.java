@@ -14,6 +14,8 @@ public class DateDemo
 
         // display time and date using toString()
         String magma = date.toString();
+
+
         return magma;
     }
 }
