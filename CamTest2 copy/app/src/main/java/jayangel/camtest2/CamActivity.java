@@ -2,7 +2,10 @@ package jayangel.camtest2;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -22,9 +25,13 @@ import android.widget.Toast;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
-
-
 import org.json.JSONObject;
+
+import com.mashape.unirest.http.*;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.*;
+import com.mashape.unirest.*;
+import org.json.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -65,6 +72,46 @@ public class CamActivity extends AppCompatActivity
 
     }
 
+
+    /*public String getRealPathFromURI(Context context, Uri contentUri)
+    {
+        Cursor cursor = null;
+        try
+        {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        catch (Exception e)
+        {
+            Log.e("PATH FROM URI: ", "Idk bro");
+            Log.e(logtag,e.toString());
+        }
+
+        finally
+        {
+            if (cursor != null)
+            {
+                cursor.close();
+            }
+        }
+        return "";
+    }*/
+
+    private String getRealPathFromURI(Uri contentUri)
+    {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(getApplicationContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent intent)
     {
@@ -83,12 +130,18 @@ public class CamActivity extends AppCompatActivity
             {
                 bitmap = MediaStore.Images.Media.getBitmap(cr,selectedImage);
                 imageView.setImageBitmap(bitmap);
-                Toast.makeText(CamActivity.this, selectedImage.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(CamActivity.this, selectedImage.getPath(),Toast.LENGTH_LONG).show();
+                Log.e(logtag,selectedImage.getPath());
 
                 /****************/
                 /***** EDIT ****/
                 /**************/
                 //need path location of the selectedImage object
+                //String picturePath = getRealPathFromURI(selectedImage);
+                //final File pictureFile = new File(picturePath);
+                //System.out.println("Path bruh: " + picturePath);
+               // Toast.makeText(CamActivity.this, picturePath,Toast.LENGTH_LONG).show();
+                new IODOCRTask().execute(selectedImage);
                 //processPictureWhenReady(picturePath); //picturePath = selectedImage.<path>
             }
 
@@ -96,6 +149,7 @@ public class CamActivity extends AppCompatActivity
 
             catch(Exception e)
             {
+                Log.e("OMG EXCEPTIONS","............................");
                 Log.e(logtag, e.toString());
             }//end of catch
 
@@ -111,7 +165,7 @@ public class CamActivity extends AppCompatActivity
     }
 
 
-    private static class IODOCRTask extends AsyncTask<File,Void,String>
+    private static class IODOCRTask extends AsyncTask<Uri,Void,String>
     {
         /*private MainActivity activity;
 
@@ -120,10 +174,12 @@ public class CamActivity extends AppCompatActivity
             this.activity = activity;
         }*/
 
+        //Log.e("HIIII","INSIDE ASYNC :D");
+
         @Override
-        protected String doInBackground(File... params)
+        protected String doInBackground(Uri... params)
         {
-            File file = params[0];
+            Uri myUri = params[0];
             String result="";
 
             try
@@ -131,7 +187,7 @@ public class CamActivity extends AppCompatActivity
 
                 HttpResponse<JsonNode> response = Unirest
                         .post("http://api.idolondemand.com/1/api/sync/ocrdocument/v1")
-                        .field("file",file)
+                        .field("file",new File(myUri.getPath()))
                         .field("mode", "scene_photo")
                         .field("apikey","9246b321-e229-41bb-a5a2-62a323897ce8")
                         .asJson();
@@ -188,9 +244,8 @@ public class CamActivity extends AppCompatActivity
                 b.recycle();
                 out.recycle();
 
-                new IODOCRTask().execute(pictureFile);
-                new IODOCRTask().execute(file);
-
+               // new IODOCRTask().execute(pictureFile);
+               // new IODOCRTask().execute(file);
             }
 
             catch (Exception e)
