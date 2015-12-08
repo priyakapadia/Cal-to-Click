@@ -3,30 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <TextView android:text=""
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="343dp"
+        android:layout_height="237dp"
+        android:weightSum="1">
+
+        <TextView android:text="HEY NOW"
+            android:layout_width="112dp"
+            android:layout_height="69dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="100dp"
+            android:layout_weight="0.21"
+            android:textSize="30dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_camera"
         android:text = "@string/button_camera"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="161dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:id="@+id/button_exit"
         android:text = "@string/button_camera2"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
-
-    <ImageView
-        android:id="@+id/image_camera"
-        android:contentDescription="@string/image_cd_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
 
 </LinearLayout>
-<!-- From: file:/Users/jaybob320/Documents/CPQ/CamTest2%20/app/src/main/res/layout/activity_cam.xml -->
+<!-- From: file:/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2%20/app/src/main/res/layout/activity_cam.xml -->
