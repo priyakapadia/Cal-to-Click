@@ -85,9 +85,9 @@ public class CamActivity extends AppCompatActivity {
 
         Calendar beginTime = Calendar.getInstance();
         beginTime.set(2016, 0, 19, 7, 30);
-                Calendar endTime = Calendar.getInstance();
-                endTime.set(2016, 0, 19, 8, 30);
-                Intent intent5 = new Intent(Intent.ACTION_INSERT);
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(2016, 0, 19, 8, 30);
+        Intent intent5 = new Intent(Intent.ACTION_INSERT);
         intent5.setData(CalendarContract.Events.CONTENT_URI);
         intent5.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
         intent5.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis());

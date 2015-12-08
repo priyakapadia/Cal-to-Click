@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Click 2 Cal</string>
-    <string name="button_camera">Add2Calendar</string>
+    <string name="button_camera">Take Another!</string>
     <string name="button_camera2">EXIT</string>
-    <string name="image_cd_camera">This is a generic content description</string>
 </resources>
