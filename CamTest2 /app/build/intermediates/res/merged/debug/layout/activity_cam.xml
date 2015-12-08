@@ -6,25 +6,50 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+<<<<<<< HEAD
     <TextView android:text="HEY NOW!"
         android:layout_width="221dp"
         android:layout_height="70dp"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="100dp"
         android:textSize="40dp" />
+=======
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="343dp"
+        android:layout_height="237dp"
+        android:weightSum="1">
+
+        <TextView android:text="HEY NOW"
+            android:layout_width="112dp"
+            android:layout_height="69dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="100dp"
+            android:layout_weight="0.21"
+            android:textSize="30dp" />
+    </LinearLayout>
+>>>>>>> db7bad5b67b2a6324f1f964abfb9625bec548e30
 
     <Button
         android:id="@+id/button_camera"
         android:text = "@string/button_camera"
         android:layout_width="fill_parent"
+<<<<<<< HEAD
         android:layout_height="231dp" />
+=======
+        android:layout_height="161dp" />
+>>>>>>> db7bad5b67b2a6324f1f964abfb9625bec548e30
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:id="@+id/button_exit"
         android:text = "@string/button_camera2"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="215dp"/>
+=======
+        android:layout_height="200dp" />
+>>>>>>> db7bad5b67b2a6324f1f964abfb9625bec548e30
 
 </LinearLayout>
 <!-- From: file:/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2%20/app/src/main/res/layout/activity_cam.xml -->

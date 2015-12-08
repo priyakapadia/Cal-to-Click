@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Click 2 Cal</string>
+<<<<<<< HEAD
     <string name="button_camera">TAKE A PICTURE!</string>
+=======
+    <string name="button_camera">Take a picture!</string>
+>>>>>>> db7bad5b67b2a6324f1f964abfb9625bec548e30
     <string name="button_camera2">EXIT</string>
     <string name="image_cd_camera">This is a generic content description</string>
 </resources>
