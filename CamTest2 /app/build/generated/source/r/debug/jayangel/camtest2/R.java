@@ -1616,8 +1616,8 @@ containing a value of this type.
         public static final int always=0x7f0c001b;
         public static final int beginning=0x7f0c0018;
         public static final int buttonPanel=0x7f0c002b;
-        public static final int button_camera=0x7f0c0050;
-        public static final int button_exit=0x7f0c0051;
+        public static final int button_camera=0x7f0c0051;
+        public static final int button_exit=0x7f0c0052;
         public static final int cancel_action=0x7f0c0054;
         public static final int checkbox=0x7f0c0039;
         public static final int chronometer=0x7f0c005a;
@@ -1638,7 +1638,6 @@ containing a value of this type.
         public static final int icon=0x7f0c0029;
         public static final int ifRoom=0x7f0c001d;
         public static final int image=0x7f0c0026;
-        public static final int image_camera=0x7f0c0052;
         public static final int info=0x7f0c005e;
         public static final int line1=0x7f0c0058;
         public static final int line3=0x7f0c005c;
@@ -1684,6 +1683,7 @@ containing a value of this type.
         public static final int text=0x7f0c005d;
         public static final int text2=0x7f0c005b;
         public static final int textSpacerNoButtons=0x7f0c0034;
+        public static final int textView=0x7f0c0050;
         public static final int time=0x7f0c0059;
         public static final int title=0x7f0c002a;
         public static final int title_template=0x7f0c002f;

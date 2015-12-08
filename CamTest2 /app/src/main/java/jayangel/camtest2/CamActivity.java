@@ -81,12 +81,11 @@ public class CamActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
-
-
+        int[] result = DataParsing.main();
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2016, 0, 19, 7, 30);
+        beginTime.set(result[2], result[0]-1, result[1], result[3], result[4]);
                 Calendar endTime = Calendar.getInstance();
-                endTime.set(2016, 0, 19, 8, 30);
+                endTime.set(result[2], result[0]-1, result[1], result[3]+1, result[4]);
                 Intent intent5 = new Intent(Intent.ACTION_INSERT);
         intent5.setData(CalendarContract.Events.CONTENT_URI);
         intent5.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
