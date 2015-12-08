@@ -25,11 +25,15 @@ public class CamActivity extends AppCompatActivity {
     private Uri imageUri;
     public int initialCounter = 0;
 
+    //protected void onTrialForHomePage(int requestCode, int resultCode,Intent intent) {
+
+   // }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
-        //opens the camera app on intial startup only
+        //opens the camera app on initial startup only
         if(initialCounter < 1)
         {
             takePhoto();
@@ -104,7 +108,7 @@ public class CamActivity extends AppCompatActivity {
 
 
 
-// If image was taken and saved succesfully you go to main screen
+// If image was taken and saved successfully you go to main screen
         if(resultCode == Activity.RESULT_OK) {
 
             Uri selectedImage = imageUri;
