@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 import java.util.regex.Matcher;
@@ -192,6 +193,8 @@ public class DataParsing {
     }
 }
 =======
+=======
+>>>>>>> master
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -302,4 +305,7 @@ public class DataParsing {
 }
 
 
+<<<<<<< HEAD
 >>>>>>> 386ae5d1834b52efbcd9902eb079f1ec104a5455
+=======
+>>>>>>> master

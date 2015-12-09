@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -23,25 +24,29 @@ public class CamActivity extends AppCompatActivity {
     private static String logtag = "CameraApp8";
     private static int TAKE_PICTURE = 1;
     private Uri imageUri;
-    public int initialCounter = 0;
+    public boolean initialCounter = true;
 
+    //protected void onTrialForHomePage(int requestCode, int resultCode,Intent intent) {
+
+   // }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
-        //opens the camera app on intial startup only
-        if(initialCounter < 1)
+        //opens the camera app on initial startup only
+        if(initialCounter)
         {
+            initialCounter = false;
             takePhoto();
-            initialCounter++;
         }
 
         //button for taking another picture
-            Button cameraButton = (Button)findViewById(R.id.button_camera);
+            ImageButton cameraButton = (ImageButton)findViewById(R.id.button_camera);
             cameraButton.setOnClickListener(cameraListener);
 
 
-        // button for exit
+        // button for exit prgogram
         Button btn1 = (Button) findViewById(R.id.button_exit);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +64,7 @@ public class CamActivity extends AppCompatActivity {
     private View.OnClickListener cameraListener = new View.OnClickListener()
     {
         public void onClick(View v){
+
             takePhoto();
         }
     }; //end of onClickListener
@@ -83,32 +89,28 @@ public class CamActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
 
 
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2016, 0, 19, 7, 30);
-                Calendar endTime = Calendar.getInstance();
-                endTime.set(2016, 0, 19, 8, 30);
-                Intent intent5 = new Intent(Intent.ACTION_INSERT);
-        intent5.setData(CalendarContract.Events.CONTENT_URI);
-        intent5.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
-        intent5.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis());
-        intent5.putExtra(CalendarContract.Events.TITLE, "Hey Now");
-        //intent5.putExtra(CalendarContract.Events.
-                         startActivity(intent5);
-
-        //.putExtra("Title", "Yoga")
-                       // .putExtra(CalendarContract.DESCRIPTION, "Group class")
-                       // .putExtra(Events.EVENT_LOCATION, "The gym")
-                      //  .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
-                      //  .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
-
-
-
-
-// If image was taken and saved succesfully you go to main screen
+// If image was taken and saved successfully you go to main screen
         if(resultCode == Activity.RESULT_OK) {
 
+            //parsing code for data taken from picture
+            int[] result = DataParsing.main();
+
+            //Adding event to calendar
+            Calendar beginTime = Calendar.getInstance();
+            // beginTime.set(result[2], result[0]-1, result[1], result[3], result[4]);
+            beginTime.set(result[2], 2, 18, 14, 30);
+            Calendar endTime = Calendar.getInstance();
+            //endTime.set(result[2], result[0]-1, result[1], result[3]+1, result[4]);
+            endTime.set(result[2], 2, 18, 15, 30);
+            Intent intent5 = new Intent(Intent.ACTION_INSERT);
+            intent5.setData(CalendarContract.Events.CONTENT_URI);
+            intent5.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
+            intent5.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis());
+            intent5.putExtra(CalendarContract.Events.TITLE, "Hey Now");
+            startActivity(intent5);
+
             Uri selectedImage = imageUri;
-            getContentResolver().notifyChange(selectedImage, null);
+           // getContentResolver().notifyChange(selectedImage, null);
             try {
 
                 Toast.makeText(CamActivity.this, selectedImage.toString(), Toast.LENGTH_LONG).show();

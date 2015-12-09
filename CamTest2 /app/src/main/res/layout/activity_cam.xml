@@ -3,29 +3,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="@color/background_floating_material_dark">
 
-    <TextView android:text=""
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_weight="0.75"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/button_camera"
-        android:text = "@string/button_camera"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"></TableRow>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:id="@+id/imageButton2"
+            android:src="@drawable/abc_ic_menu_paste_mtrl_am_alpha"
+            android:layout_weight="0.25" />
+
+        <ImageButton
+            android:layout_width="117dp"
+            android:layout_height="87dp"
+            android:id="@+id/imageButton3"
+            android:src="@drawable/abc_ic_menu_paste_mtrl_am_alpha" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:weightSum="1"
+        android:layout_gravity="center|bottom|left|right|top">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/button_camera"
+            android:layout_weight="0.79"
+            android:src="@drawable/ic_action_name"
+            android:layout_marginLeft="50dp" />
+
+    </LinearLayout>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:id="@+id/button_exit"
         android:text = "@string/button_camera2"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
-
-    <ImageView
-        android:id="@+id/image_camera"
-        android:contentDescription="@string/image_cd_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
-
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:textColorLink="@color/button_material_dark"
+        android:background="@color/accent_material_light"
+        android:layout_marginTop="100dp"
+        android:layout_weight="0.13"
+        android:layout_gravity="center_horizontal|bottom|left|right|top" />
 </LinearLayout>
