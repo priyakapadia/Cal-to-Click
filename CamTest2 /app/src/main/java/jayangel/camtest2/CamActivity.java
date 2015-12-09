@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -25,19 +26,28 @@ public class CamActivity extends AppCompatActivity {
     private Uri imageUri;
     public boolean initialCounter = true;
 
+    //protected void onTrialForHomePage(int requestCode, int resultCode,Intent intent) {
+
+   // }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
+<<<<<<< HEAD
         //opens the camera app on intial startup only
         if(initialCounter)
+=======
+        //opens the camera app on initial startup only
+        if(initialCounter < 1)
+>>>>>>> master
         {
             initialCounter = false;
             takePhoto();
         }
 
         //button for taking another picture
-            Button cameraButton = (Button)findViewById(R.id.button_camera);
+            ImageButton cameraButton = (ImageButton)findViewById(R.id.button_camera);
             cameraButton.setOnClickListener(cameraListener);
 
 
@@ -59,6 +69,7 @@ public class CamActivity extends AppCompatActivity {
     private View.OnClickListener cameraListener = new View.OnClickListener()
     {
         public void onClick(View v){
+
             takePhoto();
         }
     }; //end of onClickListener
@@ -68,6 +79,7 @@ public class CamActivity extends AppCompatActivity {
     //
     private void takePhoto(){
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        initialCounter++;
         File photo;
         String blindedByTheLight = DateDemo.main() + ".jpg";
         photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),blindedByTheLight );
@@ -86,6 +98,11 @@ public class CamActivity extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
 // If image was taken and saved successfully you go to main screen
         if(resultCode == Activity.RESULT_OK) {
 
