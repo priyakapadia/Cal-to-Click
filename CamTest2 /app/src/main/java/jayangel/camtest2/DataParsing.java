@@ -7,9 +7,9 @@ public class DataParsing {
 
     public static int [] main(){//String [] args) {
 
-        String input = "adsf-sa/d ads-fdf s/dfd dec 25 2015 9:30 pm";
+        String input = "12/8/2017 9:30 pm";
 
-        // string maniulation
+        // string manipulation
         input = input.toLowerCase();
         input = input.replace("\n", " ");
         while (input.contains("  "))
@@ -38,7 +38,7 @@ public class DataParsing {
         String regex_hyphen = "^[0-3]?[0-9]-[0-3]?[0-9]-(?:[0-9]{2})?[0-9]{2}$";
         Pattern pattern_hyphen = Pattern.compile(regex_hyphen);
 
-        for(int i = 0; i < array_size; i++)
+        for(int i = 0; i <array_size;i++) //; i++)
         {
             // find month, day, and year if format is (xx/xx/xxxx) or (xx-xx-xxxx)
             Matcher matcher_backlash = pattern_backlash.matcher(input_array[i]);
@@ -104,9 +104,10 @@ public class DataParsing {
             hour_int += 12;
         }
 
-        int [] result = {month_int,day_int,year_int,hour_int,minute_int};
+        int [] math = {month_int,day_int,year_int,hour_int,minute_int};
+       int [] result = {2015, 2, 18, 14, 30};
 
-        return result;
+        return math;
         //******** THIS IS IT **********
     }
 }
