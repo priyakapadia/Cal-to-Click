@@ -22,16 +22,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+/*********************************/
+//import com.loopj.android.http.*;
+
 import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONObject;
 
 import com.mashape.unirest.http.*;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.*;
 import com.mashape.unirest.*;
 import org.json.*;
+/*********************************/
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -164,6 +169,95 @@ public class CamActivity extends AppCompatActivity
                 Toast.LENGTH_LONG).show();
     }
 
+
+    /********************************/
+    /********** NEED TO FIX ********/
+    /********************************/
+    private static class IODOCRTask extends AsyncTask<Uri,Void,String>
+    {
+        private String apikey = "9246b321-e229-41bb-a5a2-62a323897ce8";
+        private String url_ocrdocument = "https://api.idolondemand.com/1/api/sync/ocrdocument/v1";
+
+        @Override
+        protected String doInBackground(Uri... params)
+        {
+            Uri myUri = params[0];
+            String result="";
+
+            try
+            {
+                HttpResponse<JsonNode> response = Unirest
+                        .post(url_ocrdocument)
+                        .field("file",new File(myUri.getPath()))
+                        .field("mode", "scene_photo")
+                        .field("apikey",apikey)
+                        .asJson();
+
+                JSONObject textblock =(JSONObject) response.getBody().getObject().getJSONArray("text_block").get(0);
+                result=textblock.getString("text");
+            }
+
+            catch (Exception e)
+            {
+                // keeping error handling simple
+                e.printStackTrace();
+            }
+
+            //Log.i("MARTIN"+file.getName(),result);
+
+            return result;
+
+        }
+        @Override
+        protected void onPostExecute(String result)
+        {
+            // TODO Auto-generated method stub
+            /*activity.*///toastResult(result);
+            System.out.println(result);
+        }
+    }
+
+    /******** EDIT TO USE INFO AS ABOVE **********/
+    public class Client2
+    {
+        private String apikey = "9246b321-e229-41bb-a5a2-62a323897ce8";
+        private String url_ocrdocument = "https://api.idolondemand.com/1/api/sync/ocrdocument/v1";
+
+        public void post1()
+        {
+            //Uri myUri = params[0];
+            String result="";
+
+            try
+            {
+                String fileSrc="ENTER VALID FILE PATH !!!!!!!!!!!!!!!!";
+                File f = new File(fileSrc);
+                HttpResponse httpResponse = Unirest.post(url_ocrdocument)
+                        .field("apikey", apikey)
+                        .field("file", f)
+                        .asJson();
+                System.out.println(httpResponse.getBody());
+
+                JSONObject textblock =(JSONObject) response.getBody().getObject().getJSONArray("text_block").get(0);
+                result=textblock.getString("text");
+
+            }
+
+            catch(UnirestException ue)
+            {
+                ue.printStackTrace();
+            }
+
+            return result;
+        }
+        public static void main(String[] args)
+        {
+            Client2 cl2 = new Client2();
+            cl2.post1();
+        }
+    }
+    /********************************/
+    /********************************/
 
     private static class IODOCRTask extends AsyncTask<Uri,Void,String>
     {
