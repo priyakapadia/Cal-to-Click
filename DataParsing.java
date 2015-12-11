@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0f4bf89e98b4a53b16a6168a4c0b081357b2be2c
 
 
 import java.util.regex.Matcher;
@@ -191,6 +194,7 @@ public class DataParsing {
         //return result;
         //******** THIS IS IT **********
     }
+<<<<<<< HEAD
 }
 =======
 =======
@@ -309,3 +313,6 @@ public class DataParsing {
 >>>>>>> 386ae5d1834b52efbcd9902eb079f1ec104a5455
 =======
 >>>>>>> master
+=======
+}
+>>>>>>> 0f4bf89e98b4a53b16a6168a4c0b081357b2be2c
