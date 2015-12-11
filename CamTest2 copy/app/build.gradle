@@ -13,9 +13,15 @@ android {
     }
     buildTypes {
         release {
+            //runProguard false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
     }
 }
 
@@ -23,6 +29,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
+    //compile files('libs/httpclient-4.5.1.jar')
+    //compile files('libs/httpcore-4.3.1.jar')
+    //compile files('libs/httpmime-4.5.1.jar')
+    compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
     //compile 'com.loopj.android:android-async-http:1.4.9'
     //compile 'unirest-java-1.4.8-SNAPSHOT-withDependency-ShadedForAndroid'
     //compile fileTree(dir: 'libs', include: '*.jar')
