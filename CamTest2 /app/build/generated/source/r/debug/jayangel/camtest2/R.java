@@ -1639,8 +1639,8 @@ containing a value of this type.
         public static final int icon=0x7f0c0029;
         public static final int ifRoom=0x7f0c001d;
         public static final int image=0x7f0c0026;
-        public static final int imageButton=0x7f0c0051;
         public static final int imageButton2=0x7f0c0050;
+        public static final int imageButton3=0x7f0c0051;
         public static final int info=0x7f0c005f;
         public static final int line1=0x7f0c0059;
         public static final int line3=0x7f0c005d;

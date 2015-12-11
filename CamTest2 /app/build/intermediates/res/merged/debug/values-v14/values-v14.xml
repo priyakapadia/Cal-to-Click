@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2%20/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values-v14/values-v14.xml -->
+    <!-- From: file:/Users/jaybob320/Documents/CPQ/CamTest2%20/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values-v14/values-v14.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat.Button">
         <item name="android:textSize">@dimen/abc_text_size_button_material</item>

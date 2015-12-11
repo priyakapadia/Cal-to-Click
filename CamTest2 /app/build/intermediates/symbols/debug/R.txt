@@ -485,8 +485,8 @@ int id homeAsUp 0x7f0c000d
 int id icon 0x7f0c0029
 int id ifRoom 0x7f0c001d
 int id image 0x7f0c0026
-int id imageButton 0x7f0c0051
 int id imageButton2 0x7f0c0050
+int id imageButton3 0x7f0c0051
 int id info 0x7f0c005f
 int id line1 0x7f0c0059
 int id line3 0x7f0c005d
