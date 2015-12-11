@@ -28,12 +28,14 @@ public class CamActivity extends AppCompatActivity {
 
     //protected void onTrialForHomePage(int requestCode, int resultCode,Intent intent) {
 
-   // }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
+        getSupportActionBar().hide();
         //opens the camera app on initial startup only
         if(initialCounter)
         {
@@ -46,7 +48,7 @@ public class CamActivity extends AppCompatActivity {
             cameraButton.setOnClickListener(cameraListener);
 
 
-        // button for exit prgogram
+        // button for exit program
         Button btn1 = (Button) findViewById(R.id.button_exit);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override

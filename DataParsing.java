@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0f4bf89e98b4a53b16a6168a4c0b081357b2be2c
-
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Date;
@@ -194,11 +187,7 @@ public class DataParsing {
         //return result;
         //******** THIS IS IT **********
     }
-<<<<<<< HEAD
-}
-=======
-=======
->>>>>>> master
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -307,12 +296,3 @@ public class DataParsing {
       //******** THIS IS IT **********
     }   
 }
-
-
-<<<<<<< HEAD
->>>>>>> 386ae5d1834b52efbcd9902eb079f1ec104a5455
-=======
->>>>>>> master
-=======
-}
->>>>>>> 0f4bf89e98b4a53b16a6168a4c0b081357b2be2c
