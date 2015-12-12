@@ -1,408 +1,233 @@
 package jayangel.camtest2;
 
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.FileObserver;
+import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-/*********************************/
-//import com.loopj.android.http.*;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.request.GetRequest;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+//import org.apache.http.entity.mime.HttpMultipartMode;
+//import org.apache.http.entity.mime.MultipartEntityBuilder;
+//import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.mashape.unirest.http.*;
-import com.mashape.*;
-import com.mashape.unirest.*;
-import org.json.*;
-/*********************************/
-
 import java.io.File;
-import java.io.FileOutputStream;
+import java.net.URI;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 
 //Made using this tutorial: https://www.youtube.com/watch?v=k-3zXb7GteU
 
-
-
 public class CamActivity extends AppCompatActivity
 {
+
     private static String logtag = "CameraApp8";
     private static int TAKE_PICTURE = 1;
     private Uri imageUri;
-    private OnClickListener cameraListener = new OnClickListener(){
-        public void onClick(View v){
-            takePhoto(v);
-        }
-    };
+    public boolean initialCounter = true;
 
-@Override
+    CommsEngine commsEngine;
+    private  final  String idol_ocr_service = "http://api.idolondemand.com/1/api/sync/ocrdocument/v1";
+    private String jobID = "";
+
+    //protected void onTrialForHomePage(int requestCode, int resultCode,Intent intent) {
+
+    // }
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        System.out.println("BITCH");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
+        //opens the camera app on initial startup only
+        if(initialCounter)
+        {
+            initialCounter = false;
+            takePhoto();
+        }
 
-        Button cameraButton = (Button)findViewById(R.id.button_camera);
+        //button for taking another picture
+        ImageButton cameraButton = (ImageButton)findViewById(R.id.button_camera);
         cameraButton.setOnClickListener(cameraListener);
-    }
 
-    private void takePhoto(View v)
+        /*
+        // button for exit program
+        Button btn1 = (Button) findViewById(R.id.button_exit);
+        btn1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // TODO Auto-generated method stub
+                finish();
+                System.exit(0);
+            }
+        });
+**/
+
+
+    }; //end of onCreate
+
+    private View.OnClickListener cameraListener = new View.OnClickListener()
     {
+        public void onClick(View v)
+        {
+
+            takePhoto();
+        }
+    }; //end of onClickListener
+
+    /* ----------------------------------------------------------------*/
+
+    //
+    private void takePhoto(){
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         File photo;
-        photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"picture.jpg");
+        String blindedByTheLight = DateDemo.main() + ".jpg";
+        photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),blindedByTheLight );
         imageUri = Uri.fromFile(photo);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, TAKE_PICTURE);
-
     }
 
-
-    /*public String getRealPathFromURI(Context context, Uri contentUri)
-    {
-        Cursor cursor = null;
-        try
-        {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-        catch (Exception e)
-        {
-            Log.e("PATH FROM URI: ", "Idk bro");
-            Log.e(logtag,e.toString());
-        }
-
-        finally
-        {
-            if (cursor != null)
-            {
-                cursor.close();
-            }
-        }
-        return "";
-    }*/
-
-    private String getRealPathFromURI(Uri contentUri)
-    {
-        String[] proj = { MediaStore.Images.Media.DATA };
-        CursorLoader loader = new CursorLoader(getApplicationContext(), contentUri, proj, null, null, null);
-        Cursor cursor = loader.loadInBackground();
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String result = cursor.getString(column_index);
-        cursor.close();
-        return result;
-    }
+    /* ----------------------------------------------------------------*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent intent)
     {
         super.onActivityResult(requestCode, resultCode, intent);
 
+        // If image was taken and saved successfully you go to main screen
         if(resultCode == Activity.RESULT_OK)
         {
             Uri selectedImage = imageUri;
-            getContentResolver().notifyChange(selectedImage,null);
 
-            ImageView imageView = (ImageView)findViewById(R.id.image_camera);
-            ContentResolver cr = getContentResolver();
-            Bitmap bitmap;
-
+            /*if(selectedImage == null)
+            {
+                Log.e("Fuckin rip", "idk man ):");
+            }
+            Log.e(logtag, selectedImage.getPath().toString());
+            // getContentResolver().notifyChange(selectedImage, null);
             try
             {
-                bitmap = MediaStore.Images.Media.getBitmap(cr,selectedImage);
-                imageView.setImageBitmap(bitmap);
-                Toast.makeText(CamActivity.this, selectedImage.getPath(),Toast.LENGTH_LONG).show();
-                Log.e(logtag,selectedImage.getPath());
-
-                /****************/
-                /***** EDIT ****/
-                /**************/
-                //need path location of the selectedImage object
-                //String picturePath = getRealPathFromURI(selectedImage);
-                //final File pictureFile = new File(picturePath);
-                //System.out.println("Path bruh: " + picturePath);
-               // Toast.makeText(CamActivity.this, picturePath,Toast.LENGTH_LONG).show();
-                new IODOCRTask().execute(selectedImage);
-                //processPictureWhenReady(picturePath); //picturePath = selectedImage.<path>
+                Map<String,String> map =  new HashMap<String,String>();
+                map.put("file", selectedImage.getPath().toString());
+                String fileType = "image/jpeg";
+                map.put("mode", "document_scan");
+                commsEngine.ServicePostRequest(idol_ocr_service, fileType, map, new OnServerRequestCompleteListener()
+                {
+                    @Override
+                    public void onServerRequestComplete(String response) {
+                        System.out.println(response);
+                        try {
+                            JSONObject mainObject = new JSONObject(response);
+                            if (!mainObject.isNull("jobID")) {
+                                jobID = mainObject.getString("jobID");
+                            } else
+                                ParseSyncResponse(response);
+                        } catch (Exception ex)
+                        {
+                            Log.e("STRING IS NULL",ex.toString());
+                        }
+                    }
+                    @Override
+                    public void onErrorOccurred(String error)
+                    {
+                        Log.e("Some error", error);
+                    }
+                });
             }
-
-
 
             catch(Exception e)
             {
-                Log.e("OMG EXCEPTIONS","............................");
-                Log.e(logtag, e.toString());
-            }//end of catch
+                Log.e("????", e.toString());
+
+            }//end of catch*/
+            try
+            {
+                URI uri = new URI(idol_ocr_service);
+                HttpPost httpPost = new HttpPost();
+                httpPost.setURI(uri);
+                MultipartEntityBuilder reqEntity = MultipartEntityBuilder.create();
+                reqEntity.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+                reqEntity.addPart("apikey", new StringBody("9246b321-e229-41bb-a5a2-62a323897ce8", ContentType.TEXT_PLAIN));
+                reqEntity.addBinaryBody("file", new File(selectedImage.getPath().toString()));
+                reqEntity.addPart("mode", new StringBody("document_photo", ContentType.TEXT_PLAIN));
+                httpPost.setEntity(reqEntity.build());
+                //HTTPClient httpClient = new DefaultHttpClient();
+                CloseableHttpClient httpclient = HttpClients.createDefault();
+
+                HttpResponse response = httpclient.execute(httpPost);
+                Log.e(logtag,"Successs?");
+            }
+            catch(Exception e)
+            {
+                Log.e(logtag,"fml");
+            }
+            //parsing code for data taken from picture
+            int[] result = DataParsing.main();
+
+            //Adding event to calendar
+            Calendar beginTime = Calendar.getInstance();
+            // beginTime.set(result[2], result[0]-1, result[1], result[3], result[4]);
+            beginTime.set(result[2], 2, 18, 14, 30);
+            Calendar endTime = Calendar.getInstance();
+            //endTime.set(result[2], result[0]-1, result[1], result[3]+1, result[4]);
+            endTime.set(result[2], 2, 18, 15, 30);
+            Intent intent5 = new Intent(Intent.ACTION_INSERT);
+            intent5.setData(CalendarContract.Events.CONTENT_URI);
+            intent5.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
+            intent5.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis());
+            intent5.putExtra(CalendarContract.Events.TITLE, "Hey Now");
+            startActivity(intent5);
+
 
         }// end of if
+    }//end of onActivityResult
 
-    } //end of onActivityResult
-
-
-    public void toastResult(String result)
-    {
-        Toast.makeText(getApplicationContext(), result,
-                Toast.LENGTH_LONG).show();
-    }
-
-
-    /********************************/
-    /********** NEED TO FIX ********/
-    /********************************/
-    private static class IODOCRTask extends AsyncTask<Uri,Void,String>
-    {
-        private String apikey = "9246b321-e229-41bb-a5a2-62a323897ce8";
-        private String url_ocrdocument = "https://api.idolondemand.com/1/api/sync/ocrdocument/v1";
-
-        @Override
-        protected String doInBackground(Uri... params)
-        {
-            Uri myUri = params[0];
-            String result="";
-
-            try
-            {
-                HttpResponse<JsonNode> response = Unirest
-                        .post(url_ocrdocument)
-                        .field("file",new File(myUri.getPath()))
-                        .field("mode", "scene_photo")
-                        .field("apikey",apikey)
-                        .asJson();
-
-                JSONObject textblock =(JSONObject) response.getBody().getObject().getJSONArray("text_block").get(0);
-                result=textblock.getString("text");
-            }
-
-            catch (Exception e)
-            {
-                // keeping error handling simple
-                e.printStackTrace();
-            }
-
-            //Log.i("MARTIN"+file.getName(),result);
-
-            return result;
-
+    private String ParseSyncResponse(String response) {
+        String retText = "";
+        if (response == null) {
+            Toast.makeText(this, "Unknown error occurred. Try again", Toast.LENGTH_LONG).show();
+            return "";
         }
-        @Override
-        protected void onPostExecute(String result)
-        {
-            // TODO Auto-generated method stub
-            /*activity.*///toastResult(result);
-            System.out.println(result);
-        }
-    }
-
-    /******** EDIT TO USE INFO AS ABOVE **********/
-    public class Client2
-    {
-        private String apikey = "9246b321-e229-41bb-a5a2-62a323897ce8";
-        private String url_ocrdocument = "https://api.idolondemand.com/1/api/sync/ocrdocument/v1";
-
-        public void post1()
-        {
-            //Uri myUri = params[0];
-            String result="";
-
-            try
-            {
-                String fileSrc="ENTER VALID FILE PATH !!!!!!!!!!!!!!!!";
-                File f = new File(fileSrc);
-                HttpResponse httpResponse = Unirest.post(url_ocrdocument)
-                        .field("apikey", apikey)
-                        .field("file", f)
-                        .asJson();
-                System.out.println(httpResponse.getBody());
-
-                JSONObject textblock =(JSONObject) response.getBody().getObject().getJSONArray("text_block").get(0);
-                result=textblock.getString("text");
-
-            }
-
-            catch(UnirestException ue)
-            {
-                ue.printStackTrace();
-            }
-
-            return result;
-        }
-        public static void main(String[] args)
-        {
-            Client2 cl2 = new Client2();
-            cl2.post1();
-        }
-    }
-    /********************************/
-    /********************************/
-
-    private static class IODOCRTask extends AsyncTask<Uri,Void,String>
-    {
-        /*private MainActivity activity;
-
-        protected IODOCRTask(MainActivity activity)
-        {
-            this.activity = activity;
-        }*/
-
-        //Log.e("HIIII","INSIDE ASYNC :D");
-
-        @Override
-        protected String doInBackground(Uri... params)
-        {
-            Uri myUri = params[0];
-            String result="";
-
-            try
-            {
-
-                HttpResponse<JsonNode> response = Unirest
-                        .post("http://api.idolondemand.com/1/api/sync/ocrdocument/v1")
-                        .field("file",new File(myUri.getPath()))
-                        .field("mode", "scene_photo")
-                        .field("apikey","9246b321-e229-41bb-a5a2-62a323897ce8")
-                        .asJson();
-
-                JSONObject textblock =(JSONObject) response.getBody().getObject().getJSONArray("text_block").get(0);
-                result=textblock.getString("text");
-            }
-
-            catch (Exception e)
-            {
-                // keeping error handling simple
-                e.printStackTrace();
-            }
-
-            //Log.i("MARTIN"+file.getName(),result);
-
-            return result;
-
-        }
-        @Override
-        protected void onPostExecute(String result)
-        {
-            // TODO Auto-generated method stub
-            /*activity.*///toastResult(result);
-            System.out.println(result);
-        }
-    }
-
-
-    private void processPictureWhenReady(final String picturePath)
-    {
-        final File pictureFile = new File(picturePath);
-
-
-        if (pictureFile.exists())
-        {
-            //Log.i("MARTIN", "FILE EXISTS");
-            Toast.makeText(getApplicationContext(), "FILE IS WRITTEN",
-                    Toast.LENGTH_SHORT).show();
-
-            File dir = Environment
-                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-            Bitmap b = BitmapFactory.decodeFile(picturePath);
-            Bitmap out = Bitmap.createScaledBitmap(b, 640, 960, false);
-
-            File file = new File(dir, "resize.png");
-            FileOutputStream fOut;
-            try
-            {
-                fOut = new FileOutputStream(file);
-                out.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                fOut.flush();
-                fOut.close();
-                b.recycle();
-                out.recycle();
-
-               // new IODOCRTask().execute(pictureFile);
-               // new IODOCRTask().execute(file);
-            }
-
-            catch (Exception e)
-            { // TODO
-                e.printStackTrace();
-            }
-
-
-            // The picture is ready; process it.
-        }
-
-        else
-        {
-            // The file does not exist yet. Before starting the file observer, you
-            // can update your UI to let the user know that the application is
-            // waiting for the picture (for example, by displaying the thumbnail
-            // image and a progress indicator).
-
-
-            final File parentDirectory = pictureFile.getParentFile();
-            //	Toast.makeText(getApplicationContext(), parentDirectory.getPath(),
-            //		Toast.LENGTH_SHORT).show();
-
-            FileObserver observer = new FileObserver(parentDirectory.getPath(),
-                    FileObserver.CLOSE_WRITE | FileObserver.MOVED_TO)
-            {
-                private boolean isFileWritten;
-
-                @Override
-                public void onEvent(int event, String path)
-                {
-                    //Log.i("MARTINEVENT", event+","+path);
-
-                    if (!isFileWritten)
-                    {
-                        //Log.i("MARTINEVENT", isFileWritten+",");
-
-                        File affectedFile = new File(parentDirectory, path);
-                        isFileWritten = affectedFile.equals(pictureFile);
-
-                        if (isFileWritten)
-                        {
-                            stopWatching();
-
-                            runOnUiThread(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    processPictureWhenReady(picturePath);
-                                }
-                            });
-                        }
-                    }
+        try {
+            JSONObject mainObject = new JSONObject(response);
+            JSONArray textBlockArray = mainObject.getJSONArray("text_block");
+            int count = textBlockArray.length();
+            if (count > 0) {
+                for (int i = 0; i < count; i++) {
+                    JSONObject texts = textBlockArray.getJSONObject(i);
+                    String text = texts.getString("text");
+                    retText += text;
                 }
-            };
-            observer.startWatching();
+                System.out.println("OCR'D BITCH\n" + retText);
+                return retText;
+            }
+            else
+                Toast.makeText(this, "Not available", Toast.LENGTH_LONG).show();
+        } catch (Exception ex)
+        {
+            Log.e(getApplicationContext().toString(),ex.toString());
         }
-
+        return "";
     }
-
 }//end of class
-
-
-
-

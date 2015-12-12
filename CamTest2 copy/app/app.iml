@@ -93,6 +93,9 @@
     <orderEntry type="library" exported="" name="unirest-java-1.4.8-SNAPSHOT-withDependency-ShadedForAndroid" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.0" level="project" />
+    <orderEntry type="library" exported="" name="httpcore-4.3.1" level="project" />
+    <orderEntry type="library" exported="" name="httpclient-android-4.3.5.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.1.0" level="project" />
+    <orderEntry type="library" exported="" name="httpclient-4.5.1" level="project" />
   </component>
 </module>

@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_camera"
         android:text = "@string/button_camera"
         android:layout_width="fill_parent"
