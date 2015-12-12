@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="1"
+              android:background="@color/background_floating_material_dark">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_weight="0.75"
+        android:weightSum="1"
+        android:showDividers="beginning|middle|end"
+        android:textAlignment="inherit">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Click"
+            android:id="@+id/textView"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/abc_search_url_text_normal"
+            android:textSize="60dp"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:text="2"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_vertical"
+            android:textSize="60dp"
+            android:layout_weight="0.01" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:text="CAL"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_vertical"
+            android:textSize="60dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:weightSum="1"
+        android:layout_gravity="center|bottom|left|right|top">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/button_camera"
+            android:layout_weight="0.79"
+            android:src="@drawable/ic_action_name"
+            android:layout_marginLeft="50dp"
+            android:background="@color/abc_search_url_text_normal" />
+
+    </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/button_exit"
+        android:text = "@string/button_camera2"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:textColorLink="@color/button_material_dark"
+        android:background="@color/secondary_text_disabled_material_dark"
+        android:layout_marginTop="100dp"
+        android:layout_weight="0.13"
+        android:layout_gravity="center_horizontal|bottom|left|right|top"
+        android:textSize="30dp" />
+</LinearLayout>
