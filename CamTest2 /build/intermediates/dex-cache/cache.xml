@@ -2,32 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2 /app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jar="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2 /app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-80aad42ef502c654b1a21ee97c98550dfb1269d5.jar" />
+        <dex dex="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-b9755eaa758178a4c5ecfaacca1d530ba25703be.jar" />
     </item>
     <item
-        jar="/Users/snehapradhan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jar="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/libs/unirest-java-1.3.2-SNAPSHOT-withDependency-ShadedForAndroid.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2 /app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-3422b21eab4d6bb669a25c2840b61b6ea099d50c.jar" />
+        sha1="747b56e93d254ed9eb63f4dd48a977fda75f4ec1">
+        <dex dex="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/pre-dexed/debug/unirest-java-1.3.2-SNAPSHOT-withDependency-ShadedForAndroid-89b27a623469bedcd78907bcf51b748c7126b4d2.jar" />
     </item>
     <item
-        jar="/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2 /app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
+        jar="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2 /app/build/intermediates/pre-dexed/debug/classes-66b4b85714977183ad014962cf313fe0b018576d.jar" />
+        <dex dex="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/pre-dexed/debug/classes-e3df585e89fa94f887eb259bfcacdbe4ed9b0f0c.jar" />
     </item>
     <item
-        jar="/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2 /app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jar="/Users/K/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-a95e3408e2a3c6196d8d11fe6de4b7476c5f2cee.jar" />
+    </item>
+    <item
+        jar="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="/Users/snehapradhan/Documents/BU_Fall_2015/EC_327/CPQ/CamTest2 /app/build/intermediates/pre-dexed/debug/classes-9f0f6bc3baa9cf1562d32812ec52b4f6b27bcd76.jar" />
+        <dex dex="/Users/K/Desktop/GIT/CPQ2/CamTest2 /app/build/intermediates/pre-dexed/debug/classes-f268f94c5edce6ca69a722951d44372c522db4ca.jar" />
     </item>
 
 </items>

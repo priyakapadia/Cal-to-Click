@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class DataParsing {
 
-    public static int [] main(){//String [] args) {
+    public static int [] main(String actualInput){//String [] args) {
 
-        String input = "12/8/2017 9:30 pm";
+        String input = actualInput; //"12/8/2017 9:30 pm";
 
         // string manipulation
         input = input.toLowerCase();
@@ -105,7 +105,7 @@ public class DataParsing {
         }
 
         int [] math = {month_int,day_int,year_int,hour_int,minute_int};
-       int [] result = {2015, 2, 18, 14, 30};
+        int [] result = {2015, 2, 18, 14, 30};
 
         return math;
         //******** THIS IS IT **********
