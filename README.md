@@ -1,4 +1,4 @@
-# CPQ
+# C2C
 
 Please see wiki.
 
